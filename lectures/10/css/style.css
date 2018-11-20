@@ -1,0 +1,21 @@
+@media (max-width: 1000px) {
+    .column {width: 23%;
+        display: inline-block;
+    }
+}
+@media (max-width: 800px) {
+    .column {width: 32%;
+        display: inline-block;
+    }
+}
+@media (max-width: 600px) {
+    .column {width: 48%;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 400px) {
+    .column {width: 100%;
+        margin-left: 45%;
+    }
+}
