@@ -2,13 +2,15 @@
 //-----------  STEP - 1 ----------------------
 //============================================
 
-
-/*var todos = [];
+/*
+In this step we make a function which store our inputs in task field in todos array when button add is clicked
+var todos = [];
 function add() {
     var task = document.getElementById("task").value;
     todos.push(task);
     document.getElementById('todos').innerText = todos;
-}*/
+}
+*/
 
 
 //============================================
@@ -16,14 +18,15 @@ function add() {
 //============================================
 
 
-/*var todos = [];
+/*
+it also add in todos but just display it in the list format but it has a problem
+var todos = [];
 function add() {
     var task = document.getElementById('task').value;
     todos.push(task);
     document.getElementById('task').value = '';
     show();
 }
-
 function show() {
     var ul = document.createElement('ul');
     ul.classList.add("list-group");
@@ -34,7 +37,8 @@ function show() {
         ul.appendChild(li);
     }
     document.getElementById('todos').appendChild(ul);
-}*/
+}
+*/
 
 
 //============================================
@@ -43,6 +47,7 @@ function show() {
 
 
 /*
+it is same as above just in it we clear the array after use and we also  stringify it and add del button at end
 function getTodos() {
     var todos = [];
     var todos_str = localStorage.getItem('todo');
@@ -50,13 +55,13 @@ function getTodos() {
         todos = JSON.parse(todos_str);
     return todos;
 }
-
 function add() {
     var task = document.getElementById('task').value;
     if(task.trim() == ''){
         document.getElementById('message').style.display = 'block';
         return false;
-    } else {
+    }
+    else{
         document.getElementById('message').style.display = 'none';
     }
     var todos = getTodos();
@@ -65,8 +70,6 @@ function add() {
     localStorage.setItem('todo',JSON.stringify(todos));
     show();
 }
-
-
 function show() {
     document.getElementById('todos').innerText = '';
     var todos = getTodos();
@@ -93,7 +96,7 @@ show();
 //============================================
 
 
-/*function getTodos() {
+function getTodos() {
     var todos = [];
     var todos_str = localStorage.getItem('todo');
     if(todos_str !== null)
@@ -133,10 +136,13 @@ function show() {
     ul.classList.add("list-group");
     for(var i=0; i<todos.length; i++){
         var li = document.createElement('li');
-        li.innerHTML  = '<li>' + todos[i].task + '</li>' +
+        li.innerHTML  = '<li>' +'<p  id="\'+i+\'" onclick="strikethroug(this)">'+ todos[i].task +'</p>' +'</li>' +
             '<button class="btn btn-danger" id="' + i + '">' +
             '<i class="fa fa-trash-o"></i> ' +
-            '<span class="d-none d-sm-inline"> Delete </span> </button>';
+            '<span class="d-none d-sm-inline"> Delete </span> </button>'+
+            '<button class="btn btn-reset" id1="' + i + '">' +
+            '<i class="fa fa-trash-o"></i> ' +
+            '<span class="d-none d-sm-inline"> reset </span> </button>';
         li.classList.add("list-group-item");
         if(todos[i].isDone)
             li.classList.add("done");
@@ -144,10 +150,36 @@ function show() {
     }
     document.getElementById('todos').appendChild(ul);
     var buttons = document.getElementsByClassName('btn-danger');
+    var buttons2 = document.getElementsByClassName('btn-reset');
     for(var i=0; i<buttons.length; i++){
         buttons[i].addEventListener('click',remove);
+        buttons2[i].addEventListener('click',resetval);
     }
 }
+
+function resetval(){
+    var id = this.getAttribute('id1');
+    var task = document.getElementById('task').value;
+    if(task.trim() == ''){
+        document.getElementById('message').style.display = 'block';
+        return false;
+    } else {
+        document.getElementById('message').style.display = 'none';
+    }
+    var todos = getTodos();
+    todos.splice(id,1);
+    todos.push({task: task, isDone: false});
+    localStorage.setItem('todo',JSON.stringify(todos));
+    show();
+    return false;
+}
+
+
+function strikethroug(ele)
+{
+    var x = ele.style.color ="red";
+}
+
 
 function isDone(e) {
     var todos = getTodos();
@@ -162,7 +194,7 @@ function isDone(e) {
     localStorage.setItem('todo',JSON.stringify(todos));
     show();
 }
-show();*/
+show();
 
 
 
@@ -173,15 +205,8 @@ show();*/
 //============================================
 
 /*
-
 CLASS ACTIVITY (HOME WORK) :
-
 1- Enable State of todos by clicking on the text completed, started etc
 HINT: use text-decoration:line-through; property of CSS
-
 2- Enable Editing todos in text field to update text
-
-
-
 */
-

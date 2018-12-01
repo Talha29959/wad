@@ -1,4 +1,10 @@
-var questions = [{
+const question=document.getElementById("question");
+const choiceA= document.getElementById("A");
+const choiceB= document.getElementById("B");
+const choiceC= document.getElementById("C");
+const choiceD= document.getElementById("D");
+
+let questions = [{
     question : "When a user views a page containing a JavaScript program, which machine actually executes the script?",
     choices : [ "The User's machine running a Web browser",
         "The Web server",
@@ -20,40 +26,45 @@ var questions = [{
         "none of the above"],
     correctAnswer : 1
 }];
-var currentQuestion = 0;
-var correctAnswers = 0;
+let currentQuestion = 0;
+const lastQuestion= questions.length;
+let correctAnswers=0;
 var quizOver = false;
 displayCurrentQuestion();
 document.getElementById("quiz-message").style.display = 'none';
 function displayNext() {
     currentQuestion+=1;
-    if(currentQuestion===questions.length){
+    if(currentQuestion===lastQuestion){
         displayScore();
-        resetQuiz();
     }
+    displayScore();
     document.getElementById("choice-list").innerHTML = '';
     displayCurrentQuestion();
 }
 function displayCurrentQuestion() {
-    var answer;
-    document.getElementById("question").innerHTML = questions[currentQuestion].question;
-    for (var i = 0; i < 4; i++)
+    let q=questions[currentQuestion];
+    question.innerHTML= q.question;
+    for (let i = 0; i < 4; i++)
     {
-        document.getElementById("choice-list").innerHTML+='<input type="radio" name="check">'+questions[currentQuestion].choices[i]+"<br>";
+        document.getElementById("choice-list").innerHTML+='<input type="radio" name="check">'+q.choices[i]+"<br>";
     }
-    if(answer===questions[currentQuestion].correctAnswer)
-    {
+}
+
+function checkAnswer(answer){
+    let q=questions[currentQuestion];
+    k=answer;
+    if(answer==q.correctAnswer){
         correctAnswers++;
     }
-
 }
+
 function resetQuiz() {
     currentQuestion = 0;
     correctAnswers = 0;
     hideScore();
 }
 function displayScore() {
-    document.getElementById("result").innerHTML = "you scored: " + correctAnswers + " out of: " + questions.length;
+    document.getElementById("result").innerHTML = "you scored: " + correctAnswers + " out of: " + lastQuestion;
     document.getElementById("result").style.display = 'block';
 }
 function hideScore() {
